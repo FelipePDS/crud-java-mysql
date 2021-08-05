@@ -39,9 +39,9 @@
 <h2 id="technologies">:computer: Technologies</h2>
 
 <ul>
-  <li><a href="https://www.programmersought.com/article/97597958554/">Compiler Java - jdk1.8.0_281</a></li>
-  <li><a href="https://www.bdts.com.au/tips-and-resources/java-jre-1-8-0_281-msi-deployment.html">Compiler Java - jre1.8.0_281</a></li>
-  <li><a href="https://netbeans.apache.org/download/index.html">Code Editor - NetBeans 8.2</a></li>
+  <li>Compiler Java: <a href="https://www.programmersought.com/article/97597958554/">jdk1.8.0_281</a></li>
+  <li>Compiler Java: <a href="https://www.bdts.com.au/tips-and-resources/java-jre-1-8-0_281-msi-deployment.html">jre1.8.0_281</a></li>
+  <li>Code Editor: <a href="https://netbeans.apache.org/download/index.html">NetBeans 8.2</a></li>
   <li><a href="">Apache</a></li>
   <li><a href="https://www.apachefriends.org/download.html">XAMPP 8.0</a></li>
 </ul>
