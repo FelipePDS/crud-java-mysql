@@ -25,17 +25,25 @@
 
 <br>
 <h2 id="about">:books: About</h2>
-<p></p>
+
+<p>The project consists of the famous CRUD system (Create, Read, Update and Delete) that manipulates the database entities that are in use by the project to apply these methods above it. In the case of this project, a Service Order Control of a Technical Assistance in Computers is used. Entity Database Relationship Diagram used in the project is represented as follows:</p>
+
+<img src="https://github.com/FelipePDS/crud-java-mysql/blob/main/.github/DER_CrudJavaMysql.PNG" alt="Entity Relationship Diagram" />
+
+<blockquote>For more details about the database, access the sql file of its initialization and its entities: <kbd><a href="https://github.com/FelipePDS/crud-java-mysql/blob/main/.github/crud_java_mysql.sql">crud_java_mysql.sql</a></kdb></blockquote>
+
+<p>The Project consists of a Java Web standard that is compiled by the Apache server which, in order to make use of data, is contacted with the <a href="https://www.mysql.com/">MySQL</a> Database Management System (during the development of the project, <a href="https://www.apachefriends.org/pt_br/download.html">XAMPP</a> was used to run MySQL).</p>
+<p>For the Frontend part (which is rendered on the Web) the <a href="https://www.devmedia.com.br/introducao-ao-java-server-pages-jsp/25602">Java Server Pages</a> (JSP) template engine was used.</p>
 
 <br>
 <h2 id="technologies">:computer: Technologies</h2>
 
 <ul>
-  <li>Compiler Java - jdk1.8.0_281</li>
-  <li>Compiler Java - jre1.8.0_281</li>
-  <li>Code Editor - NetBeans 8.2</li>
-  <li>Apache</li>
-  <li>XAMPP 8.0</li>
+  <li><a href="https://www.programmersought.com/article/97597958554/">Compiler Java - jdk1.8.0_281</a></li>
+  <li><a href="https://www.bdts.com.au/tips-and-resources/java-jre-1-8-0_281-msi-deployment.html">Compiler Java - jre1.8.0_281</a></li>
+  <li><a href="https://netbeans.apache.org/download/index.html">Code Editor - NetBeans 8.2</a></li>
+  <li><a href="">Apache</a></li>
+  <li><a href="https://www.apachefriends.org/download.html">XAMPP 8.0</a></li>
 </ul>
 
 <br>
