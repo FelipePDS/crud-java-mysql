@@ -33,7 +33,7 @@
 <blockquote>For more details about the database, access the sql file of its initialization and its entities: <kbd><a href="https://github.com/FelipePDS/crud-java-mysql/blob/main/.github/crud_java_mysql.sql">crud_java_mysql.sql</a></kdb></blockquote>
 
 <p>The Project consists of a Java Web standard that is compiled by the Apache server which, in order to make use of data, is contacted with the <a href="https://www.mysql.com/">MySQL</a> Database Management System (during the development of the project, <a href="https://www.apachefriends.org/pt_br/download.html">XAMPP</a> was used to run MySQL).</p>
-<p>For the Frontend part (which is rendered on the Web) the <a href="https://www.devmedia.com.br/introducao-ao-java-server-pages-jsp/25602">Java Server Pages</a> (JSP) template engine was used.</p>
+<p>For the Frontend part (which is rendered on the Web) the <a href="">Jframe</a> (JSP) was used.</p>
 
 <br>
 <h2 id="technologies">:computer: Technologies</h2>
