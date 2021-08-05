@@ -29,11 +29,27 @@
 
 <br>
 <h2 id="technologies">:computer: Technologies</h2>
-<p></p>
+
+<ul>
+  <li>Compiler Java - jdk1.8.0_281</li>
+  <li>Compiler Java - jre1.8.0_281</li>
+  <li>Code Editor - NetBeans 8.2</li>
+  <li>Apache</li>
+  <li>XAMPP 8.0</li>
+</ul>
 
 <br>
 <h2 id="how-to-clone">:open_file_folder: How to clone</h2>
-<p></p>
+
+<p>To perform your cloning we need the <kbd><a href="https://git-scm.com/downloads">Gitbash</a></kbd> terminal, which we will do using commands that already automate some processes...</p>
+
+``` bash
+# To clone repository
+$ git clone https://github.com/FelipePDS/crud-java-mysql.git
+
+# Open
+$ cd crud-java-mysql
+```
 
 <br>
 <h2 id="how-to-use">:mag: How to use</h2>
