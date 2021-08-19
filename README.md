@@ -6,11 +6,11 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/FelipePDS/crud-java-mysql/blob/main/LICENSE"><img src="https://img.shields.io/github/license/FelipePDS/crud-java-mysql?style=for-the-badge"/></a> 
+  <a href="https://github.com/FelipePDS/Crud-java-mysql/blob/main/LICENSE"><img src="https://img.shields.io/github/license/FelipePDs/crud-java-mysql?style=for-the-badge"/></a> 
   <img src="https://img.shields.io/static/v1?label=Java&message=v1.8.0_281&color=ED8B00&style=for-the-badge&logo=java"/> 
   <img src="https://img.shields.io/static/v1?label=NetBeans&message=v8.2&color=1B6AC6&style=for-the-badge&logo=NetBeans"/> <br>
-  <img src="https://img.shields.io/github/last-commit/FelipePDS/crud-java-mysql?style=for-the-badge"/> 
-  <img src="https://img.shields.io/github/repo-size/FelipePDS/crud-java-mysql?style=for-the-badge"/>
+  <img src="https://img.shields.io/github/last-commit/FelipePDs/crud-java-mysql?style=for-the-badge"/> 
+  <img src="https://img.shields.io/github/repo-size/FelipePDs/crud-java-mysql?style=for-the-badge"/>
 </p>
 
 <h2></h2>
@@ -61,6 +61,7 @@ $ cd crud-java-mysql
 <br>
 <h2 id="how-to-use">:mag: How to use</h2>
 <p></p>
+:construction:
 
 <br>
 <h2 id="license">:memo: License</h2>
