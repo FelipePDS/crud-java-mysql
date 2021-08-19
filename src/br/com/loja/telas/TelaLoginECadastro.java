@@ -2,6 +2,7 @@ package br.com.loja.telas;
 
 import java.sql.*;
 import br.com.loja.dal.ModuloConexao;
+import java.awt.HeadlessException;
 import javax.swing.JOptionPane;
 
 /**
@@ -33,11 +34,12 @@ public class TelaLoginECadastro extends javax.swing.JFrame {
             if (resultSet.next()) {
                 TelaPrincipal telaPrincipal = new TelaPrincipal();
                 telaPrincipal.setVisible(true);
-                this.setVisible(false);
+                this.dispose();
+                conexao.close();
             } else {
                 JOptionPane.showMessageDialog(null, "Email e/ou Senha inválido(s)!");
             }
-        } catch (Exception ex) {
+        } catch (HeadlessException | SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
@@ -63,7 +65,7 @@ public class TelaLoginECadastro extends javax.swing.JFrame {
             if (resultSet.next()) {
                 JOptionPane.showMessageDialog(null, "Email já existente! Escolha outro para cadastrar-se!");
             } 
-            else if (email == "" || senha == "") {
+            else if ("".equals(email) || "".equals(senha)) {
                 JOptionPane.showMessageDialog(null, "Digite um Email / Senha válidos para cadastrar-se!");
             } 
             else {
@@ -77,7 +79,7 @@ public class TelaLoginECadastro extends javax.swing.JFrame {
 
                 fazerLogin(email, senha);
             }
-        } catch (Exception ex) {
+        } catch (HeadlessException | SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
@@ -105,9 +107,9 @@ public class TelaLoginECadastro extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         campoTelefoneCadastro = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        campoSenhaCadastro = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         btnCadastro = new javax.swing.JButton();
+        campoSenhaCadastro = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login e Cadastro");
@@ -157,6 +159,14 @@ public class TelaLoginECadastro extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addGap(22, 22, 22)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(btnCadastro)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(campoSenhaCadastro)))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jLabel5)
@@ -169,16 +179,10 @@ public class TelaLoginECadastro extends javax.swing.JFrame {
                                 .addGroup(layout.createSequentialGroup()
                                     .addComponent(jLabel8)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(campoTelefoneCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addGap(22, 22, 22)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnCadastro)
-                                    .addComponent(campoSenhaCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(campoTelefoneCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(46, 46, 46)
                         .addComponent(jLabel6)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                .addGap(56, 56, 56)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -242,18 +246,23 @@ public class TelaLoginECadastro extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        fazerLogin(
-            campoEmailLogin.getText(), 
-            campoSenhaLogin.getText()
-        );
+        String email = campoEmailLogin.getText();
+        String senha = new String(campoSenhaLogin.getPassword());
+        
+        fazerLogin(email, senha);
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void btnCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastroActionPerformed
+        String nome = campoNomeCadastro.getText();
+        String email = campoEmailLogin.getText();
+        String senha = new String(campoSenhaCadastro.getPassword());
+        String telefone = campoTelefoneCadastro.getText();
+        
         fazerCadastro(
-            campoNomeCadastro.getText(),
-            campoEmailCadastro.getText(),
-            campoSenhaCadastro.getText(),
-            campoTelefoneCadastro.getText()
+            nome,
+            email,
+            senha,
+            telefone
         );
     }//GEN-LAST:event_btnCadastroActionPerformed
 
@@ -299,7 +308,7 @@ public class TelaLoginECadastro extends javax.swing.JFrame {
     private javax.swing.JTextField campoEmailCadastro;
     private javax.swing.JTextField campoEmailLogin;
     private javax.swing.JTextField campoNomeCadastro;
-    private javax.swing.JTextField campoSenhaCadastro;
+    private javax.swing.JPasswordField campoSenhaCadastro;
     private javax.swing.JPasswordField campoSenhaLogin;
     private javax.swing.JTextField campoTelefoneCadastro;
     private javax.swing.JLabel jLabel1;
