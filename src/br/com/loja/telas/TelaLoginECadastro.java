@@ -32,8 +32,17 @@ public class TelaLoginECadastro extends javax.swing.JFrame {
             resultSet = preparedStatement.executeQuery();
             
             if (resultSet.next()) {
+                boolean usuarioAdmin = "1".equals(resultSet.getString(6));
+                
                 TelaPrincipal telaPrincipal = new TelaPrincipal();
                 telaPrincipal.setVisible(true);
+                TelaPrincipal.labelUsuario.setText(resultSet.getString(2));
+                
+                if (usuarioAdmin) {
+                    TelaPrincipal.btnMenuCadastroUsuarios.setEnabled(true);
+                    TelaPrincipal.btnMenuRelatorio.setEnabled(true);
+                } 
+                
                 this.dispose();
                 conexao.close();
             } else {

@@ -31,7 +31,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDesktopPane2 = new javax.swing.JDesktopPane();
+        Desktop = new javax.swing.JDesktopPane();
         labelUsuario = new javax.swing.JLabel();
         labelData = new javax.swing.JLabel();
         Menu = new javax.swing.JMenuBar();
@@ -53,14 +53,16 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jDesktopPane2Layout = new javax.swing.GroupLayout(jDesktopPane2);
-        jDesktopPane2.setLayout(jDesktopPane2Layout);
-        jDesktopPane2Layout.setHorizontalGroup(
-            jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 513, Short.MAX_VALUE)
+        Desktop.setPreferredSize(new java.awt.Dimension(640, 480));
+
+        javax.swing.GroupLayout DesktopLayout = new javax.swing.GroupLayout(Desktop);
+        Desktop.setLayout(DesktopLayout);
+        DesktopLayout.setHorizontalGroup(
+            DesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 640, Short.MAX_VALUE)
         );
-        jDesktopPane2Layout.setVerticalGroup(
-            jDesktopPane2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        DesktopLayout.setVerticalGroup(
+            DesktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
@@ -70,6 +72,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
         labelData.setText("Data");
 
         btnMenuCadastro.setText("Cadastro");
+        btnMenuCadastro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMenuCadastroActionPerformed(evt);
+            }
+        });
 
         btnMenuCadastroCliente.setText("Cliente");
         btnMenuCadastroCliente.addActionListener(new java.awt.event.ActionListener() {
@@ -88,6 +95,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         btnMenuCadastro.add(btnMenuCadastroOS);
 
         btnMenuCadastroUsuarios.setText("Usuários");
+        btnMenuCadastroUsuarios.setEnabled(false);
         btnMenuCadastroUsuarios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMenuCadastroUsuariosActionPerformed(evt);
@@ -98,6 +106,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         Menu.add(btnMenuCadastro);
 
         btnMenuRelatorio.setText("Relatório");
+        btnMenuRelatorio.setEnabled(false);
 
         btnMenuRelatorioServicos.setText("Serviços");
         btnMenuRelatorio.add(btnMenuRelatorioServicos);
@@ -136,29 +145,25 @@ public class TelaPrincipal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jDesktopPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(Desktop, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(labelUsuario)
-                        .addGap(44, 44, 44))
+                        .addGap(18, 18, 18)
+                        .addComponent(labelUsuario))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(104, 104, 104)
-                        .addComponent(labelData)
-                        .addContainerGap(118, Short.MAX_VALUE))))
+                        .addGap(27, 27, 27)
+                        .addComponent(labelData)))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(labelUsuario)
-                        .addGap(5, 5, 5)
-                        .addComponent(labelData)
-                        .addGap(0, 438, Short.MAX_VALUE))
-                    .addComponent(jDesktopPane2))
-                .addContainerGap())
+                .addGap(4, 4, 4)
+                .addComponent(labelUsuario)
+                .addGap(18, 18, 18)
+                .addComponent(labelData)
+                .addContainerGap(449, Short.MAX_VALUE))
+            .addComponent(Desktop, javax.swing.GroupLayout.DEFAULT_SIZE, 502, Short.MAX_VALUE)
         );
 
         pack();
@@ -201,6 +206,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
         telaSobre.setVisible(true);
     }//GEN-LAST:event_btnMenuAjudaSobreActionPerformed
 
+    private void btnMenuCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuCadastroActionPerformed
+        TelaUsuarios telaUsuarios = new TelaUsuarios();
+        telaUsuarios.setVisible(true);
+        Desktop.add(telaUsuarios);
+    }//GEN-LAST:event_btnMenuCadastroActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -237,19 +248,19 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JDesktopPane Desktop;
     private javax.swing.JMenuBar Menu;
     private javax.swing.JMenu btnMenuAjuda;
     private javax.swing.JMenuItem btnMenuAjudaSobre;
     private javax.swing.JMenu btnMenuCadastro;
     private javax.swing.JMenuItem btnMenuCadastroCliente;
     private javax.swing.JMenuItem btnMenuCadastroOS;
-    private javax.swing.JMenuItem btnMenuCadastroUsuarios;
+    public static javax.swing.JMenuItem btnMenuCadastroUsuarios;
     private javax.swing.JMenu btnMenuOpcoesSair;
-    private javax.swing.JMenu btnMenuRelatorio;
+    public static javax.swing.JMenu btnMenuRelatorio;
     private javax.swing.JMenuItem btnMenuRelatorioServicos;
-    private javax.swing.JDesktopPane jDesktopPane2;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JLabel labelData;
-    private javax.swing.JLabel labelUsuario;
+    public static javax.swing.JLabel labelUsuario;
     // End of variables declaration//GEN-END:variables
 }
