@@ -178,7 +178,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMenuCadastroOSActionPerformed
 
     private void btnMenuCadastroUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuCadastroUsuariosActionPerformed
-        // TODO add your handling code here:
+        TelaGerenciamentoUsuario telaUsuarios = new TelaGerenciamentoUsuario();
+        telaUsuarios.setVisible(true);
+        Desktop.add(telaUsuarios);
     }//GEN-LAST:event_btnMenuCadastroUsuariosActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
@@ -207,9 +209,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMenuAjudaSobreActionPerformed
 
     private void btnMenuCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuCadastroActionPerformed
-        TelaUsuarios telaUsuarios = new TelaUsuarios();
-        telaUsuarios.setVisible(true);
-        Desktop.add(telaUsuarios);
+        
     }//GEN-LAST:event_btnMenuCadastroActionPerformed
 
     /**
