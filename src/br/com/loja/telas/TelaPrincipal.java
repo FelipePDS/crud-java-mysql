@@ -71,7 +71,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         labelData.setText("Data");
 
-        btnMenuCadastro.setText("Cadastro");
+        btnMenuCadastro.setText("Gerenciamento");
         btnMenuCadastro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMenuCadastroActionPerformed(evt);

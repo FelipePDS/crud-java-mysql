@@ -68,7 +68,7 @@ public class TelaGerenciamentoUsuario extends javax.swing.JInternalFrame {
         setClosable(true);
         setIconifiable(true);
         setMaximizable(true);
-        setTitle("Cadastro de Usuários");
+        setTitle("Gerenciamento de Usuário");
         setPreferredSize(new java.awt.Dimension(640, 480));
 
         jLabel7.setText("Email");
@@ -88,13 +88,14 @@ public class TelaGerenciamentoUsuario extends javax.swing.JInternalFrame {
         });
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
-        jLabel3.setText("CADASTRAR USUÁRIO");
+        jLabel3.setText("GERENCIAMENTO DE USUÁRIO");
 
         jLabel5.setText("Nome");
 
         jLabel1.setText("Admin");
 
         campoAdmin.add(adminNao);
+        adminNao.setSelected(true);
         adminNao.setText("Não");
         adminNao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -103,7 +104,6 @@ public class TelaGerenciamentoUsuario extends javax.swing.JInternalFrame {
         });
 
         campoAdmin.add(adminSim);
-        adminSim.setSelected(true);
         adminSim.setText("Sim");
         adminSim.setToolTipText("");
 
@@ -240,12 +240,13 @@ public class TelaGerenciamentoUsuario extends javax.swing.JInternalFrame {
             String nome,
             String email,
             String senha,
-            String telefone
+            String telefone,
+            int admin
     ) {
         String comandoSqlSelecionaUsuario = "SELECT * FROM usuarios WHERE email=?";
 
         String comandoSqlCadastraUsuario = "INSERT INTO "
-                + "usuarios (nome, email, senha, telefone) "
+                + "usuarios (nome, email, senha, telefone, admin) "
                 + "VALUES (?, ?, ?, ?, ?)";
 
         try {
@@ -264,7 +265,11 @@ public class TelaGerenciamentoUsuario extends javax.swing.JInternalFrame {
                 preparedStatement.setString(2, email);
                 preparedStatement.setString(3, senha);
                 preparedStatement.setString(4, telefone);
-                preparedStatement.setString(5, adminSim.isSelected() ? "1" : "0");
+                preparedStatement.setInt(5, admin);
+                
+                limparCampos();
+                
+                JOptionPane.showMessageDialog(null, "Usuário " + nome + " cadastrado!");
 
                 preparedStatement.executeUpdate();
             }
@@ -273,12 +278,12 @@ public class TelaGerenciamentoUsuario extends javax.swing.JInternalFrame {
         }
     }
     
-    private void pegarPorId() {
+    private void pegarPorId(String id) {
         String comandoSql = "SELECT * FROM usuarios WHERE id=?";
         
         try {
             preparedStatement = conexao.prepareStatement(comandoSql);
-            preparedStatement.setString(1, campoId.getText());
+            preparedStatement.setString(1, id);
             resultSet = preparedStatement.executeQuery();
             
             if (resultSet.next()) {
@@ -297,18 +302,29 @@ public class TelaGerenciamentoUsuario extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null, ex);
         }
     }
+    
+    private void limparCampos() {
+        campoId.setText(null);
+        campoNome.setText(null);
+        campoEmail.setText(null);
+        campoSenha.setText(null);
+        campoTelefone.setText(null);
+        campoAdmin.setSelected(adminNao.getModel(), true);
+    }
 
     private void btnCadastroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastroActionPerformed
         String nome = campoNome.getText();
         String email = campoEmail.getText();
         String senha = new String(campoSenha.getPassword());
         String telefone = campoTelefone.getText();
+        int admin = adminSim.isSelected() ? 1 : 0;
 
         criar(
             nome,
             email,
             senha,
-            telefone
+            telefone,
+            admin
         );
     }//GEN-LAST:event_btnCadastroActionPerformed
 
@@ -321,7 +337,9 @@ public class TelaGerenciamentoUsuario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
-        pegarPorId();
+        String idUsuario = campoId.getText();
+        
+        pegarPorId(idUsuario);
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
     private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
