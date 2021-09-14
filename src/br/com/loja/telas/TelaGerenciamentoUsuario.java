@@ -237,11 +237,11 @@ public class TelaGerenciamentoUsuario extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void criar(
-            String nome,
-            String email,
-            String senha,
-            String telefone,
-            int admin
+        String nome,
+        String email,
+        String senha,
+        String telefone,
+        int admin
     ) {
         String comandoSqlSelecionaUsuario = "SELECT * FROM usuarios WHERE email=?";
 
@@ -298,8 +298,47 @@ public class TelaGerenciamentoUsuario extends javax.swing.JInternalFrame {
             } else {
                 JOptionPane.showMessageDialog(null, "Usuário não cadastro!");
             }
-        } catch (Exception ex) {
+        } catch (HeadlessException | SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
+        }
+    }
+    
+    private void alterarPorId(
+        String id,
+        String nome,
+        String email,
+        String senha,
+        String telefone,
+        int admin
+    ) {
+        if (id.isEmpty() || nome.isEmpty() || email.isEmpty() || senha.isEmpty() || telefone.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Preencha todos os campos obrigatórios!");
+            return;
+        }
+        
+        String comandoSql = "UPDATE usuarios SET nome=?, email=?, senha=?, telefone=?, admin=? "
+                + "WHERE id=?";
+        
+        try {
+            preparedStatement = conexao.prepareStatement(comandoSql);
+            preparedStatement.setString(1, nome);
+            preparedStatement.setString(2, email);
+            preparedStatement.setString(3, senha);
+            preparedStatement.setString(4, telefone);
+            preparedStatement.setInt(5, admin);
+            preparedStatement.setString(6, id);
+            
+            boolean alteradoComSucesso = preparedStatement.executeUpdate() > 0;
+            
+            if (alteradoComSucesso) {
+                JOptionPane.showMessageDialog(null, "Dados do usuário alterado com sucesso!");
+                
+                limparCampos();
+            } else {
+                JOptionPane.showMessageDialog(null, "Houve um erro ao alterar o usuário! Verifique se o ID digitado está correto...");
+            }
+        } catch (HeadlessException | SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex); 
         }
     }
     
@@ -333,7 +372,21 @@ public class TelaGerenciamentoUsuario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_adminNaoActionPerformed
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        // TODO add your handling code here:
+        String idUsuario = campoId.getText();
+        String nome = campoNome.getText();
+        String email = campoEmail.getText();
+        String senha = new String(campoSenha.getPassword());
+        String telefone = campoTelefone.getText();
+        int admin = adminSim.isSelected() ? 1 : 0;
+        
+        alterarPorId(
+            idUsuario,
+            nome,
+            email,
+            senha,
+            telefone,
+            admin
+        );
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPesquisarActionPerformed
