@@ -342,6 +342,34 @@ public class TelaGerenciamentoUsuario extends javax.swing.JInternalFrame {
         }
     }
     
+    private void deletarPorId(
+        String id
+    ) {
+        int confirma = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja remover este usuário?", 
+                "Atenção!", JOptionPane.YES_NO_OPTION);
+        
+        if (confirma == JOptionPane.YES_OPTION) {
+            String comandoSql = "DELETE FROM usuarios WHERE id=?";
+        
+            try {
+                preparedStatement = conexao.prepareStatement(comandoSql);
+                preparedStatement.setString(1, id);
+
+                boolean deletadoComSucesso = preparedStatement.executeUpdate() > 0;
+
+                if (deletadoComSucesso) {
+                    JOptionPane.showMessageDialog(null, "O usuário foi deletado com sucesso!");
+
+                    limparCampos();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Houve um erro ao deletar o usuário! Verifique se o ID digitado está correto...");
+                }
+            } catch (HeadlessException | SQLException ex) {
+                JOptionPane.showMessageDialog(null, ex); 
+            }
+        }
+    }
+    
     private void limparCampos() {
         campoId.setText(null);
         campoNome.setText(null);
@@ -396,7 +424,9 @@ public class TelaGerenciamentoUsuario extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnPesquisarActionPerformed
 
     private void btnDeletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeletarActionPerformed
-        // TODO add your handling code here:
+        String idUsuario = campoId.getText();
+        
+        deletarPorId(idUsuario);
     }//GEN-LAST:event_btnDeletarActionPerformed
 
 
