@@ -170,7 +170,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnMenuCadastroClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuCadastroClienteActionPerformed
-        // TODO add your handling code here:
+        TelaGerenciamentoCliente telaGerenciamentoCliente = new TelaGerenciamentoCliente();
+        
+        telaGerenciamentoCliente.setVisible(true);
+        Desktop.add(telaGerenciamentoCliente);
     }//GEN-LAST:event_btnMenuCadastroClienteActionPerformed
 
     private void btnMenuCadastroOSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuCadastroOSActionPerformed
