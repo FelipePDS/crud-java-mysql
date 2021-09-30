@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 02-Set-2021 às 00:04
+-- Tempo de geração: 01-Out-2021 às 00:33
 -- Versão do servidor: 10.4.20-MariaDB
 -- versão do PHP: 7.3.29
 
@@ -31,9 +31,19 @@ CREATE TABLE `clientes` (
   `id` int(11) NOT NULL,
   `nome` varchar(50) NOT NULL,
   `email` varchar(75) NOT NULL,
-  `senha` varchar(50) NOT NULL,
+  `endereco` varchar(255) NOT NULL,
   `telefone` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Extraindo dados da tabela `clientes`
+--
+
+INSERT INTO `clientes` (`id`, `nome`, `email`, `endereco`, `telefone`) VALUES
+(1, 'Teste2', 'teste2@email.com', 'rua sla oq', '34905430593503'),
+(2, 'José', 'jose@email.com', 'endereço do josé', '43254524534'),
+(4, 'Joao', 'joao@email.com', 'endereço do joa', '54353453443'),
+(5, 'Maria', 'maria@email.com', 'endereço da maria', '325345345345');
 
 -- --------------------------------------------------------
 
@@ -73,7 +83,8 @@ CREATE TABLE `usuarios` (
 
 INSERT INTO `usuarios` (`id`, `nome`, `email`, `senha`, `telefone`, `admin`) VALUES
 (1, 'Bolso Bonoro', 'bonoro@email.com', '1234', '(99) 99999-9999', b'0'),
-(2, 'Michael Jackson', 'mjack@email.com', '123', '(35) 93545-5435', b'1');
+(2, 'Michael Jackson', 'mjack@email.com', '123', '(35) 93545-5435', b'1'),
+(4, 'Teste', 'teste@email.com', '123', '(54) 94564-5345', b'0');
 
 --
 -- Índices para tabelas despejadas
@@ -108,7 +119,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de tabela `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de tabela `ordem_de_servicos`
@@ -120,7 +131,7 @@ ALTER TABLE `ordem_de_servicos`
 -- AUTO_INCREMENT de tabela `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- Restrições para despejos de tabelas
