@@ -177,7 +177,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMenuCadastroClienteActionPerformed
 
     private void btnMenuCadastroOSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuCadastroOSActionPerformed
-        // TODO add your handling code here:
+        TelaOS telaOs = new TelaOS();
+        telaOs.setVisible(true);
+        Desktop.add(telaOs);
     }//GEN-LAST:event_btnMenuCadastroOSActionPerformed
 
     private void btnMenuCadastroUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuCadastroUsuariosActionPerformed

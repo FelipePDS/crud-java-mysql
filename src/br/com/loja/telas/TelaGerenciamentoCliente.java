@@ -240,7 +240,7 @@ public class TelaGerenciamentoCliente extends javax.swing.JInternalFrame {
 
         btnCadastro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/loja/icones/create.png"))); // NOI18N
         btnCadastro.setText("CADASTRAR");
-        btnCadastro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCadastro.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnCadastro.setPreferredSize(new java.awt.Dimension(80, 80));
         btnCadastro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -250,7 +250,7 @@ public class TelaGerenciamentoCliente extends javax.swing.JInternalFrame {
 
         btnEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/loja/icones/update.png"))); // NOI18N
         btnEditar.setText("CADASTRAR");
-        btnEditar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEditar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnEditar.setPreferredSize(new java.awt.Dimension(80, 80));
         btnEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -260,7 +260,7 @@ public class TelaGerenciamentoCliente extends javax.swing.JInternalFrame {
 
         btnDeletar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/loja/icones/delete.png"))); // NOI18N
         btnDeletar.setText("CADASTRAR");
-        btnDeletar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnDeletar.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btnDeletar.setPreferredSize(new java.awt.Dimension(80, 80));
         btnDeletar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -270,13 +270,13 @@ public class TelaGerenciamentoCliente extends javax.swing.JInternalFrame {
 
         tabelaClientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Id", "Nome", "Email", "Senha", "Telefone", "Admin"
             }
         ));
         tabelaClientes.addMouseListener(new java.awt.event.MouseAdapter() {
