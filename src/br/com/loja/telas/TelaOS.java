@@ -4,20 +4,100 @@
  * and open the template in the editor.
  */
 package br.com.loja.telas;
+import java.sql.SQLException;
+import java.sql.*;
+import br.com.loja.dal.ModuloConexao;
+import java.awt.HeadlessException;
+import javax.swing.JOptionPane;
+import net.proteanit.sql.DbUtils;
 
 /**
  *
  * @author Felipe
  */
 public class TelaOS extends javax.swing.JInternalFrame {
-
+    
+    Connection conexao = null;
+    PreparedStatement preparedStatement = null;
+    ResultSet resultSet = null;
+    
+    private String tipo;
+    
     /**
      * Creates new form TelaOS
      */
     public TelaOS() {
         initComponents();
+        
+        conexao = ModuloConexao.conectar();
+    }
+    
+    private void pesquisarClientesPorNome(String nome) {
+        String comandoSql = "SELECT * FROM clientes WHERE nome LIKE ?";
+        
+        try {
+            preparedStatement = conexao.prepareStatement(comandoSql);
+            preparedStatement.setString(1, nome + "%");
+            resultSet = preparedStatement.executeQuery();
+            tblClientes.setModel(DbUtils.resultSetToTableModel(resultSet));
+        } catch (HeadlessException | SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }
+    
+    private void emitirOs(
+        String tipo,
+        String situacao,
+        String equipamento,
+        String defeito,
+        String tecnico,
+        String valor,
+        String servico,
+        String idcli
+    ) {
+        String comandoSql = "INSERT INTO ordem_de_servicos(tipo, situacao, equipamento, defeito, "
+                + "tecnico, valor, servico, id_cliente) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        
+        try {
+            preparedStatement = conexao.prepareStatement(comandoSql);
+            preparedStatement.setString(1, tipo);
+            preparedStatement.setString(2, situacao);
+            preparedStatement.setString(3, equipamento);
+            preparedStatement.setString(4, defeito);
+            preparedStatement.setString(5, tecnico);
+            preparedStatement.setString(6, valor);
+            preparedStatement.setString(7, servico);
+            preparedStatement.setString(8, idcli);
+            
+            if (txtIdCli.getText().isEmpty() || txtOsEquip.getText().isEmpty() || txtOsDef.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Preencha todos os campos obrigatórios!");
+            } else {
+                boolean adicionado = preparedStatement.executeUpdate() > 0;
+                
+                if (adicionado) {
+                    JOptionPane.showMessageDialog(null, "Ordem de serviço emitida com sucesso!");
+                    
+                    limparCampos();
+                }
+            }
+        } catch (HeadlessException | SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex);
+        }
     }
 
+    private void setarCampos() {
+        int setar = tblClientes.getSelectedRow();
+        tblClientes.getModel().getValueAt(setar, 0).toString();
+    }
+    
+    private void limparCampos() {
+        txtIdCli.setText(null);
+        txtOsEquip.setText(null);
+        txtOsDef.setText(null);
+        txtOsTec.setText(null);
+        txtOsValor.setText(null);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -64,6 +144,23 @@ public class TelaOS extends javax.swing.JInternalFrame {
         setIconifiable(true);
         setMaximizable(true);
         setTitle("Tela OS");
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameOpened(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
@@ -77,6 +174,11 @@ public class TelaOS extends javax.swing.JInternalFrame {
 
         orcamentoServico.add(rbtOrc);
         rbtOrc.setText("Orçamento");
+        rbtOrc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbtOrcActionPerformed(evt);
+            }
+        });
 
         orcamentoServico.add(rbtOs);
         rbtOs.setText("Ordem de Serviço");
@@ -122,6 +224,12 @@ public class TelaOS extends javax.swing.JInternalFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Cliente"));
 
+        txtCliPesquisar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtCliPesquisarKeyReleased(evt);
+            }
+        });
+
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/br/com/loja/icones/pesquisar.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -142,6 +250,11 @@ public class TelaOS extends javax.swing.JInternalFrame {
                 "ID", "Nome", "Fone"
             }
         ));
+        tblClientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblClientesMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblClientes);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -293,6 +406,25 @@ public class TelaOS extends javax.swing.JInternalFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtCliPesquisarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCliPesquisarKeyReleased
+        String nome = txtCliPesquisar.getText();
+        
+        pesquisarClientesPorNome(title);
+    }//GEN-LAST:event_txtCliPesquisarKeyReleased
+
+    private void tblClientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblClientesMouseClicked
+        setarCampos();
+    }//GEN-LAST:event_tblClientesMouseClicked
+
+    private void rbtOrcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbtOrcActionPerformed
+        tipo = "OS";
+    }//GEN-LAST:event_rbtOrcActionPerformed
+
+    private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
+        rbtOrc.setSelected(true);
+        tipo = "Orçamento";
+    }//GEN-LAST:event_formInternalFrameOpened
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
